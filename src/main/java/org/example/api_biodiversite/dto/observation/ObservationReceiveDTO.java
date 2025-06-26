@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ObservationReceiveDTO {
-    private Specie specie;
+    private Long specieId;
     private String observerName;
     private String location;
     private Double latitude;
@@ -21,8 +21,10 @@ public class ObservationReceiveDTO {
     private String comment;
     
     public Observation dtoToEntity(){
+        Specie specie = Specie.builder().specieId(specieId).build();
+
         return Observation.builder()
-                .specie(getSpecie())
+                .specie(specie)
                 .observerName(getObserverName())
                 .localisation(getLocation())
                 .latitude(getLatitude())

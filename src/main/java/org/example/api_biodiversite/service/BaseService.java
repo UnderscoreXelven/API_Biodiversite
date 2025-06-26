@@ -1,5 +1,6 @@
 package org.example.api_biodiversite.service;
 
+import org.example.api_biodiversite.dto.observation.ObservationResponseDTO;
 import org.example.api_biodiversite.exception.NotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
 
