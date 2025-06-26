@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.api_biodiversite.dto.observation.ObservationResponseDTO;
 
 import java.time.LocalDate;
 
@@ -26,4 +27,17 @@ public class Observation {
     private Double longitude;
     private LocalDate observationDate;
     private String comment;
+
+    public ObservationResponseDTO entityToDTO(){
+        return ObservationResponseDTO.builder()
+                .observationId(getObservationId())
+                .observerName(getObserverName())
+                .location(getLocalisation())
+                .latitude(getLatitude())
+                .longitude(getLongitude())
+                .observationDate(getObservationDate())
+                .comment(getComment())
+                .specie(getSpecie().entityToDTO())
+                .build();
+    }
 }
