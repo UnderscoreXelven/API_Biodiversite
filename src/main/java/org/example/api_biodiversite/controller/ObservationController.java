@@ -18,6 +18,7 @@ public class ObservationController {
         this.observationService = observationService;
     }
 
+    //Get all observations with possible filters
     @GetMapping
     public ResponseEntity<List<ObservationResponseDTO>> getAllObservations(
             @RequestParam(required = false) Long specieId,
@@ -29,11 +30,13 @@ public class ObservationController {
         return ResponseEntity.ok(observations);
     }
 
+    //Get one specific observation by id
     @GetMapping("/{id}")
     public ResponseEntity<ObservationResponseDTO> getObservationById(@PathVariable("id") Long observationId){
         return ResponseEntity.ok(observationService.getById(observationId));
     }
 
+    //Create a new observation
     @PostMapping
     public ResponseEntity<ObservationResponseDTO> saveObservation(@RequestBody ObservationReceiveDTO observationDTO){
         return ResponseEntity.ok(observationService.save(observationDTO));

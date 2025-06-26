@@ -9,10 +9,10 @@ import java.util.List;
 public abstract class BaseService<T, ID, R, D> {
     protected abstract JpaRepository<T, ID> getRepository();
 
-    //Renvoie le ResponseDTO de l'entité
+    //Return a specific ResponseDTO for a given entity
     protected abstract R toResponseDTO(T entity);
 
-    //Renvoie l'entité du ResponseDTO
+    //Return a specific Entity for a given ResponseDTO
     protected abstract T toEntity(D dto);
 
     public R save(D dto){

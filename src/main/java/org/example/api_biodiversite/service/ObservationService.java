@@ -41,6 +41,7 @@ public class ObservationService extends BaseService<Observation, Long, Observati
 
     @Override
     public ObservationResponseDTO save(ObservationReceiveDTO dto){
+      //Get proper species by id
       Specie specie = specieRepository.findById(dto.getSpecieId()).orElseThrow(NotFoundException::new);
       Observation observation = dto.dtoToEntity();
       observation.setSpecie(specie);
@@ -67,7 +68,7 @@ public class ObservationService extends BaseService<Observation, Long, Observati
         boolean hasObserver = observerName != null && !observerName.isBlank();
         boolean hasDateRange = startDate != null && endDate != null;
 
-        // Crée une clé string en concaténant les filtres actifs
+        //Create a string key by concatenating the active filters.
         String key = (hasSpecie ? "S" : "") + (hasObserver ? "O" : "") + (hasDateRange ? "D" : "");
 
         List<Observation> observations;

@@ -21,11 +21,13 @@ public class TravellogController {
         this.travellogService = travellogService;
     }
 
+    //Get all travel logs
     @GetMapping
     public ResponseEntity<List<TravellogResponseDTO>> getAllTravellog(){
         return ResponseEntity.ok(travellogService.getAll());
     }
 
+    //Get one specific travel log by id
     @GetMapping("/stats/{idObservation}")
     public ResponseEntity<TravellogSummaryResponseDTO> getStatsByObservation(@PathVariable("idObservation") Long idObservation){
         List<TravellogResponseDTO> logs = travellogService.getAllByObservationId(idObservation);
@@ -42,6 +44,7 @@ public class TravellogController {
         return ResponseEntity.ok(summary);
     }
 
+    //Create a new travel log
     @PostMapping
     public ResponseEntity<TravellogResponseDTO> addTravellog(@RequestBody TravellogReceiveDTO travellogReceiveDTO){
         return ResponseEntity.status(HttpStatus.CREATED).body(travellogService.save(travellogReceiveDTO));

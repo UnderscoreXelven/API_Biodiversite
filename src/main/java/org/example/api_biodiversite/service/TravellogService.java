@@ -41,6 +41,7 @@ public class TravellogService extends BaseService<Travellog, Long, TravellogResp
     @Override
     public TravellogResponseDTO save(TravellogReceiveDTO dto){
         Travellog travellog = dto.dtoToEntity();
+        //Calc estimated CO2
         travellog.setEstimatedCo2Kg(calcCO2(travellog.getMode(), travellog.getDistanceKm()));
 
         travellog.setObservation(observationRepository.findById(travellog.getObservation().getObservationId()).orElseThrow(NotFoundException::new));
@@ -65,7 +66,7 @@ public class TravellogService extends BaseService<Travellog, Long, TravellogResp
         return travellogRepository.findAllByObservation_ObservationId(observationId).stream().map(Travellog::entityToDTO).toList();
     }
 
-    //Calcule l'émission de CO2 en fonction du mode de déplacement et de la distance
+    //Calculates CO2 emissions based on the mode of transport and distance
     public Double calcCO2(TravelMode mode, Double distanceKm){
         double co2 = 0.0;
         switch(mode){
